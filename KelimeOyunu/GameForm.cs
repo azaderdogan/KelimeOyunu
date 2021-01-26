@@ -13,6 +13,12 @@ namespace KelimeOyunu
         Random random = new Random();
         private int randomNumber;
         private int randomLetterNumber;
+        private int minute = 3;
+        private int second = 1;
+        private HashSet<Label> openedLetterLabel = new HashSet<Label>();
+        private List<int> openedIndex = new List<int>();
+        private AskQuestion currentaskQuestion = null;
+        private List<Label> letters = new List<Label>();
         public GameForm()
         {
             InitializeComponent();
@@ -36,7 +42,7 @@ namespace KelimeOyunu
             letters.Clear();
             openedIndex.Clear();
             openedLetterLabel.Clear();
-            
+            answerTxt.Text = "";
             setAsk();
         }
 
@@ -56,8 +62,7 @@ namespace KelimeOyunu
 
        
         
-        private int minute = 4;
-        private int second = 59;
+       
         private void timer1_Tick(object sender, EventArgs e)
         {
             second--;
@@ -76,11 +81,10 @@ namespace KelimeOyunu
 
         private void finishGame()
         {
-
+            MessageBox.Show("Puanınız: " + point.Text);
         }
 
-        private HashSet<Label> openedLetterLabel = new HashSet<Label>();
-        private List<int> openedIndex = new List<int>();
+     
         private void letterTakeBtn_Click(object sender, EventArgs e)
         {
             
@@ -129,17 +133,18 @@ namespace KelimeOyunu
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("Tahmin ediliyor.");
             //tahmin et
             if (answerTxt.Text.Equals(currentaskQuestion.word))
             {
+                Console.WriteLine("cevap doğru .");
                 //todo
-                totalPoint = (currentaskQuestion.word.Length - openedIndex.Count) * 10;
+                totalPoint += (currentaskQuestion.word.Length - openedIndex.Count) * 10;
                 point.Text = totalPoint.ToString();
+                Console.WriteLine();
             }
         }
 
-        private AskQuestion currentaskQuestion = null;
-        private List<Label> letters = new List<Label>();
         private void setAsk()
         {
             
@@ -161,10 +166,10 @@ namespace KelimeOyunu
                 else
                 {
                     label.Text = currentaskQuestion.word.Substring(i, 1);
-                    Console.WriteLine(label.Text);
+                   
                 }
                 letters.Add(label);
-
+                Console.WriteLine(currentaskQuestion.word);
                 panel.Controls.Add(label);
 
                 //listBox1.Items.Add(label);

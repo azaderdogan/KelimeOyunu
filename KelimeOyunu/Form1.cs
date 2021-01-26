@@ -29,8 +29,9 @@ namespace KelimeOyunu
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            if (usernameTxt.Text.Equals("azad") && passwordTxt.Text.Equals("1234"))
+            if (usernameTxt.Text.Equals("admin")& passwordTxt.Text.Equals("1234"))
             {
+             ;
                 alert.Text = "Başarılı";
                 GameForm gameForm = new GameForm();
                 gameForm.Show();
@@ -39,7 +40,7 @@ namespace KelimeOyunu
             }
             else
             {
-                alert.Text = "Kullanıcı adı veya Şifre Hatalı\nLütfen tekrar deneyiniz";
+                MessageBox.Show("Kullanıcı adı veya Şifre Hatalı\nLütfen tekrar deneyiniz");
             }
 
 
@@ -50,6 +51,11 @@ namespace KelimeOyunu
             AddQuestionForm addQuestionForm = new AddQuestionForm();
             addQuestionForm.Show();
             this.Hide();
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
         }
     }
